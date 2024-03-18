@@ -9,7 +9,11 @@ def fetch_entries():
     password = 'cicero2223'
     dsb_client = DSBApi(username, password)
     entries = dsb_client.fetch_entries()
-    return jsonify(entries)
+
+    # Filter entries for class "10a"
+    class_10a_entries = [entry for entry in entries if entry.get("class") == "10a"]
+
+    return jsonify(class_10a_entries)
 
 if __name__ == '__main__':
     app.run()
