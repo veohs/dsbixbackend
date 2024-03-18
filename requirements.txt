@@ -2,3 +2,10 @@ Flask==3.0.0
 dsbix
 beautifulsoup4
 requests
+pillow
+pytesseract
+json
+datetime
+gzip
+uuid
+base64
