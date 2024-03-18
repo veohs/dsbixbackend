@@ -1,11 +1,6 @@
-Flask==3.0.0
-dsbix
-beautifulsoup4
-requests
-pillow
-pytesseract
-json
-datetime
-gzip
-uuid
-base64
+Flask==2.0.2
+dsbix==0.1
+beautifulsoup4==4.10.0
+requests==2.26.0
+pillow==9.0.0
+pytesseract==0.3.8
