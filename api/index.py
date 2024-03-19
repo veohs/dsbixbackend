@@ -13,7 +13,7 @@ def fetch_entries_by_day():
     
     days = ["Montag","Dienstag","Mittwoch","Donnerstag","Freitag"]
     if wanted_day.capitalize() not in days:
-        return "Ungültiger Tag. Bitte geben Sie einen gültigen Tag ein."
+        return jsonify({"error": "Ungültiger Tag. Bitte geben Sie einen gültigen Tag ein."}), 400
 
     entries = dsbclient.fetch_entries()
     
@@ -33,10 +33,10 @@ def fetch_entries_by_day():
                     
                     final.append({"lesson": lesson, "new_subject": new_subject, "room": room, "old_subject": old_subject, "teacher": teacher, "type": vertreter, "text": text})
 
-    message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge.\n"
-    for s in final:
-        message += f"lesson: {s['lesson']} | vertretung(?): {s['new_subject']} | new_subject: {s['room']} | room: {s['old_subject']} | teacher: {s['teacher']} | type: {s['type']} | text: {s['text']}  |x| "
-    return message
+    if not final:
+        return jsonify({"message": f"Am {wanted_day.capitalize()} gibt es keine Einträge für die Klasse {klasse}."})
+
+    return jsonify(final)
 
 if __name__ == '__main__':
     app.run()
