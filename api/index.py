@@ -4,7 +4,7 @@ from dsbix import DSBApi
 app = Flask(__name__)
 
 # Defining DSB client globally
-dsbclient = DSBApi("YOUR USER", "YOUR PASSWORD", tablemapper=['class','lesson','new_subject','room','subject','new_teacher','type','text'])
+dsbclient = DSBApi("299761", "cicero2223", tablemapper=['class','lesson','new_subject','room','subject','new_teacher','type','text'])
 
 @app.route('/fetch_entries', methods=['GET'])
 def fetch_entries_by_day():
