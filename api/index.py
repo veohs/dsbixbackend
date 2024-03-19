@@ -33,7 +33,7 @@ def fetch_entries_by_day():
 
     message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge. "
     for s in final:
-        message += f"In der {s['lesson']}. Stunde hast du {s['new_teacher']} mit {s['room']} in {s['old_subject']}. Grund dafür ist {s['text']}. Letztes Update: {s['updated']} "
+        message += f"In der {s['lesson']}. Stunde hast du {s['teacher']} mit {s['room']} in {s['old_subject']}. Grund dafür ist {s['text']}. Letztes Update: {s['updated']} "
     return message
 
 if __name__ == '__main__':
