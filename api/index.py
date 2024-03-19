@@ -4,7 +4,7 @@ from dsbix import DSBApi
 app = Flask(__name__)
 
 # Defining DSB client globally
-dsbclient = DSBApi("299761", "cicero2223", tablemapper=['class','lesson','new_subject','room','subject','new_teacher','type','text'])
+dsbclient = DSBApi("299761", "cicero2223", tablemapper=['class','lesson','new_subject','room','subject','new_teacher','type','text','update'])
 
 @app.route('/fetch_entries', methods=['GET'])
 def fetch_entries_by_day():
@@ -16,6 +16,7 @@ def fetch_entries_by_day():
         return "Ungültiger Tag. Bitte geben Sie einen gültigen Tag ein."
 
     entries = dsbclient.fetch_entries()
+    
     final = []
 
     for s in range(len(entries)):
@@ -23,17 +24,18 @@ def fetch_entries_by_day():
             if entries[s][i]["class"] == klasse:
                 if entries[s][i]["day"] == wanted_day.capitalize():
                     lesson = entries[s][i]["lesson"]
-                    subject = entries[s][i]["new_subject"]
-                    teacher = entries[s][i]["room"]
-                    oldsubject = entries[s][i]["subject"]
-                    room = entries[s][i]["new_teacher"]
+                    new_subject = entries[s][i]["new_subject"]
+                    room = entries[s][i]["room"]
+                    old_subject = entries[s][i]["subject"]
+                    teacher = entries[s][i]["new_teacher"]
                     vertreter = entries[s][i]["type"]
                     text = entries[s][i]["text"]
-                    final.append({"lesson":lesson, "new_subject": subject, "room":room, "old_subject":oldsubject, "teacher":teacher, "type":vertreter, "text":text})
+                    
+                    final.append({"lesson": lesson, "new_subject": new_subject, "room": room, "old_subject": old_subject, "teacher": teacher, "type": vertreter, "text": text})
 
-    message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge. \n "
+    message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge.\n"
     for s in final:
-        message += f"\n In der {s['lesson']}. Stunde hast du {s['teacher']} mit {s['room']} in {s['old_subject']}. Grund dafür ist {s['text']}."
+        message += f"lesson: {s['lesson']} | vertretung(?): {s['new_subject']} | new_subject: {s['room']} | room: {s['old_subject']} | teacher: {s['teacher']} | type: {s['type']} | text: {s['text']}  |x| "
     return message
 
 if __name__ == '__main__':
