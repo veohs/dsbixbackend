@@ -31,9 +31,9 @@ def fetch_entries_by_day():
                     text = entries[s][i]["text"]
                     final.append({"lesson":lesson, "new_subject": subject, "room":room, "old_subject":oldsubject, "teacher":teacher, "type":vertreter, "text":text})
 
-    message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge. "
+    message = f"Am {wanted_day.capitalize()} gibt es {str(len(final))} Einträge. \n "
     for s in final:
-        message += f"In der {s['lesson']}. Stunde hast du {s['teacher']} mit {s['room']} in {s['old_subject']}. Grund dafür ist {s['text']}. Letztes Update: {s['updated']} "
+        message += f"\n In der {s['lesson']}. Stunde hast du {s['teacher']} mit {s['room']} in {s['old_subject']}. Grund dafür ist {s['text']}."
     return message
 
 if __name__ == '__main__':
