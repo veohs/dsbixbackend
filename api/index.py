@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 from dsbix import DSBApi
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Erlaubt CORS für alle Endpunkte der Flask-Anwendung
 
 # Defining DSB client globally
 dsbclient = DSBApi("299761", "cicero2223", tablemapper=['class', 'lesson', 'new_subject', 'room', 'subject', 'new_teacher', 'type', 'text', 'update'])
